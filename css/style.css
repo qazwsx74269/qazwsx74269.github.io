@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron:500");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 body {
-  background: #0f1516;
+  background: #ceeef3;
   font-family: 'Open Sans', sans-serif;
 }
 @media (max-width: 33.9em) {
@@ -487,7 +487,7 @@ footer.footer-content {
   padding-top: 100px;
   width: 100%;
   min-height: 350px;
-  background: #0f1516;
+  background: #ceeef3;
   color: #d7ecff;
   border-top: 1px dotted #d7ecff;
   text-align: center;
