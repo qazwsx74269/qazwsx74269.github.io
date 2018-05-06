@@ -158,6 +158,35 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2018/04/20/Temporal-Action-Detection-with-Structured-Segment-Networks笔记/">
+                Temporal Action Detection with Structured Segment Networks笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-20</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>先说说这篇<a href="https://arxiv.org/pdf/1704.06228" title="下载" target="_blank" rel="noopener">论文</a>主要研究什么？<br>简而言之，就是对视频中出现的行为进行检测，目标是预测行为的类别和行为所在的时序区间。<br>本文提出了一种结构化的分段网络，这样更容易提炼出视频中关于行为的信息，并采用TAG（temporal actionness grouping)来产生高质量的行为提议。下面来分别对这两种新点子讲讲自己的理解：<br>Structured Segment Network:<br><a href="https://photouploads.com/image/EjvY" target="_blank" rel="noopener"><img src="http://photouploads.com/images/baf323.png" alt="baf323.png"></a><br>该网络采用了一种结构化的时序金字塔池化方法（STPP）对提议（proposal）进行提取特征。首先将原始视频进行分帧，然后用TAG方法产生许多proposal。对于每一个proposal，对其进行增广后，文中提出将其分割成L个段（segment），然后从这L个段中分别采样出一个片段（snippet）来。这一个snippet是由一些连续的帧和这些帧对应的光流图像（一个帧对应到许多光流图像，光流图像是另外从视频中计算提取）组成，即是单帧表示静态内容，许多光流图像表示对应的动态内容。这样的话就产生了L个snippets，而增广提议被分割成三个阶段（starting，course，ending)，这样每个阶段都包含了一定数目的snippets，总和加起来是L。 具体来说，文中提出对这三个阶段的处理都不同。对于course阶段，文中提出把它分两级，第一级就是一个部分，第二级分为两个部分。对于starting和ending的阶段，直接就是一级，这样的话总共就是5个部分。然后将这5个部分里面的snippet送入特征提取器（feature extractor)，得到Vt。对于代表每个部分的池化特征，文中提出这样计算：<br><img src="http://photouploads.com/images/d8659d.png" alt="d8659d.png"><br>最后将所有的池化特征进行联结，得到这个代表整个增广提议的全局特征，送入两种分类器中。这两种分类器一类是多类行为分类器，另一类是一系列二元完整性分类器。多类行为分类器对视频中的行为分为K+1类，K种行为外加一个背景类，这种分类器只对course阶段的三个部分所提取联结成的全局特征进行处理。而一系列（K个）二元完整性分类器是对所有部分所提取联结成的全局特征进行处理。这两种分类器的结果进行综合便得到行为所属的类别。<br><a href="https://photouploads.com/image/EjvW" target="_blank" rel="noopener"><img src="http://photouploads.com/images/34a543.png" alt="34a543.png"></a><br>我解释下上述的计算分类loss的公式，第一项是在给定提议pi下，求该提议中出现行为类别ci（ci属于K+1个类别之一）的概率，进行交叉熵计算。然后第二项只对非背景类进行计算，在给定提议pi下并且确定了其中包含的行为类别ci，求该提议下行为是完整（bi用来表示行为是完整的）的概率，进行交叉熵计算。最后把这两项交叉熵加起来得到总的分类损失。对于用TAG产生的proposals，文中提出将其分为三类标签，分别是（ci&gt;0,bi=1)，ci=0，(ci&gt;0,bi=0)，也就是提议中出现行为并且行为是完整的、提议中没有出现行为即只出现背景、提议中出现行为但不完整（具体怎么打这三个标签得依据最近的groundtruth）。在训练的时候，实际上这个分类损失就是网络模型对proposal预测的值（提议中出现某类行为的概率）与该proposal本身的标签之间进行比较而来的。<br><a href="https://photouploads.com/image/Ejva" target="_blank" rel="noopener"><img src="http://photouploads.com/images/00d043.png" alt="00d043.png"></a><br>对于行为的定位，文中提出与RCNN中盒回归类似的时序回归方法即是对正提议pi（positive proposal，ci&gt;0,bi=1）的中心ui，和长度θi（log尺度）相对于groundtruth的变化进行回归，这个groundtruth指的是与该正提议最接近的groundtruth 。至于回归函数，文中提出用smooth L1损失函数，然后将这两类损失进行相加得到上述的多任务损失。用λ来调整两个损失的重要性。</p>
+<p>下面再讲讲TAG（temporal actionness grouping，时序行为性分组）技术的原理。首先这个技术是用来产生proposal的，相比于其他产生proposal的方法，这个技术产生的数量更少并且更好。<br>      <a href="https://photouploads.com/image/Ejvi" target="_blank" rel="noopener"><img src="http://photouploads.com/images/188580.png" alt="188580.png"></a><br>      首先用一个二元行为性分类器对从视频中提取出的一系列snippets进行分类，得到结果就如上图蓝色线所示。然后倒过来得到红色线，用分水岭算法对红色线所示的低洼进行处理，即是用不同级别γ的水对低洼进行灌溉。低洼越低，所在的水级颜色越深。最后把这些流域（basins）G(γ)提出来得到红线之下的方块图。然后我再说说产生proposal的方块合并策略，从第一个方块开始，逐渐加入紧随着的方块，若用方块的底边之和除以第一个方块的左边界到最后加入的方块的右边界之间的长度所计算出来的值低于阈值T时，第一块的左边界到最后加入的一块的右边界之间的段作为一个proposal。文中提出从0到1之间以0.05的步长来设置一系列γ和T，用这些参数采用TAG方法产生出proposals，最后用NMS（非极大值抑制）方法去除高度重合的proposal来得到最终的proposals。</p>
+<p>总结一下，文中提出的这种对proposal增广又分级进行处理的策略着实有效，TAG技术的运用使得proposal的质量大大提高，具体细节请看原文（在第一行“论文”两字上），想要交流的可在下面评论^_^                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2018/04/15/新的开始/">
                 新的开始
             </a>
@@ -259,6 +288,10 @@
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
         <h2>Recent Posts</h2>
         <ul>
+            
+            <li>
+                <a class="footer-post" href="/2018/04/20/Temporal-Action-Detection-with-Structured-Segment-Networks笔记/">Temporal Action Detection</a>
+            </li>
             
             <li>
                 <a class="footer-post" href="/2018/04/15/新的开始/">新的开始</a>
