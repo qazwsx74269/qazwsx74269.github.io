@@ -10,6 +10,9 @@
 
     <!--Description-->
     
+        <meta name="description" content="Zheng Shou, Dongang Wang, Shih-Fu Chang:Temporal Action Localization in Untrimmed Videos via Multi-stage CNNs. CVPR 2016: 1049-1058
+Kensho Hara, Hirok">
+    
 
     <!--Author-->
     
@@ -18,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Zehan Song&#39;s Blog"/>
+        <meta property="og:title" content="survey about video-related work in computer vision"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +32,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Zehan Song&#39;s Blog</title>
+    <title>survey about video-related work in computer vision - Zehan Song&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -146,17 +149,14 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">Zehan Song's Blog</h1>
-        
     </div>
 </header>
 
         <section class="main">
             
-                
 <div class="post">
 
-    <div class="post-header index">
+    <div class="post-header">
         <h1 class="title">
             <a href="/2018/05/26/survey-about-video-related-work-in-computer-vision/">
                 survey about video-related work in computer vision
@@ -171,9 +171,13 @@
         </div>
     </div>
 
-    
-        <div class="content">
-            <ol>
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <ol>
 <li>Zheng Shou, Dongang Wang, Shih-Fu Chang:Temporal Action Localization in Untrimmed Videos via Multi-stage CNNs. CVPR 2016: 1049-1058</li>
 <li>Kensho Hara, Hirokatsu Kataoka, Yutaka Satoh:Can Spatiotemporal 3D CNNs Retrace the History of 2D CNNs and ImageNet? CoRR abs/1711.09577 (2017)</li>
 <li>Colin Lea, Michael D. Flynn, René Vidal, Austin Reiter, Gregory D. Hager:Temporal Convolutional Networks for Action Segmentation and Detection. CVPR 2017: 1003-1012</li>
@@ -197,126 +201,20 @@
 </ol>
 <p>[1]提出了一种用于时序动作定位的多阶段3D卷积网络，包括多尺度视频片段的生成、多阶段segment-CNN以及后处理（temporal action localization）。<br>[2]观察到深度2D卷积神经网络经过ImageNet数据集预训练后迁移到detection，segmentation，captioning等其他任务上取得的显著成就后，尝试在Kinetics数据集上对深度3D卷积神经网络预训练，观察迁移到detection、summarization以及Optical flow的提取等任务上的效果（action recognition）。<br>[3]提出了一个基于时序卷积的卷积-逆卷积网络，来实现对视频帧的类别分类（action segmentation and detection）。<br>[4]提出了一种用于提取视频时空特征的3D卷积神经网络（action recognition）。<br>[5]基于C3D提出了一种卷积-逆卷积的神经网络，输入一小段视频，输出frame-level的动作类别概率和segment-level的时序动作定位（temporal action localization）。<br>[6]将传统针对静止图像的FasterRCNN框架进行了扩展，将视频物体检测框架扩展为候选时空管道生成和候选时空管道识别两个模块，基于这些高质量的候选时空管道应用编码-解码LSTM网络进行时空管道的识别能够有效的提升检测整体的正确率（video object detection）。<br>[7]提出了一种结构化分段的时序金字塔网络，既产生高质量的动作提议又提升了对动作的准确识别率和定位（temporal action localization）。<br>[8]提出使用时间域的聚合提升单帧特征学习，使得对视频中每一帧的物体识别率得到提高（video object detection）。<br>[9]提出了一种以动作描述驱动的时序动态图网络（video object detection）。<br>[10]利用视频中连续帧内容高度相关这一特点只对关键帧计算CNN特征提取，然后通过一个flow field将关键帧的CNN特征propagte到其他帧去，减少了计算量（video object detection）。<br>[11]提出了一种对视频动作进行聚类、标记以及定位的无监督方法（temporal action localization）。<br>[12]提出一种时序分段网络，并基于two-stream法进行改进（action recognition）。<br>[13]基于[5]提出TPN（temporal preservation networks）模型，将temporal convolution替换为temporal preservation convolution能够在不进行时序池化操作的情况下获得同样大小的感受野而不缩短时序长度，从而更好地保留时序信息（temporal action localization）。<br>[14]提出了一种产生动作提议的高效算法（temporal action localization）。<br>[15]提出一种管道卷积神经网络，先将一个视频分成clips，分别从clips中产生候选动作管道，然后这些clips中的候选管道进行合理地衔接，最后对这些衔接好的候选管道进行动作检测（temporal action detection）。<br>[16]提出了一种时空可变部分模型（SDPM），对每类动作学习出一种时空模式，也就是将这种时空模式与目标动作进行尽可能地匹配（temporal action localization）。<br>[17]提出一种多区域的two-stream Faster R-CNN网络，在appearance R-CNN和motion R-CNN中选择多个身体区域（即上半身、下半身和边界区域）来提高帧级动作检测的性能（temporal action localization）。<br>[18]提出了一种通过预测待处理的下一帧位置来逐步完成对视频的动作检测（temporal action localization）。<br>[19]提出一种对视频帧的层级式的分割表示方法，第一层表示出该视频帧的最基本的分割（root），第二层则更细粒度地将root进行分割表示（temporal action localization）。<br>[20]基于对图片的费舍向量表示提出了对视频的近似的正则化费舍向量表示方法（temporal action localization）。</p>
 
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/20/Temporal-Action-Detection-with-Structured-Segment-Networks笔记/">
-                Temporal Action Detection with Structured Segment Networks笔记
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-20</span>
-            
-            
-            
-        </div>
     </div>
 
     
-        <div class="content">
-            <p>先说说这篇<a href="https://arxiv.org/pdf/1704.06228" title="下载" target="_blank" rel="noopener">论文</a>主要研究什么？<br>简而言之，就是对视频中出现的行为进行检测，目标是预测行为的类别和行为所在的时序区间。<br>本文提出了一种结构化的分段网络，这样更容易提炼出视频中关于行为的信息，并采用TAG（temporal actionness grouping)来产生高质量的行为提议。下面来分别对这两种新点子讲讲自己的理解：<br>Structured Segment Network:<br><a href="https://photouploads.com/image/EjvY" target="_blank" rel="noopener"><img src="http://photouploads.com/images/baf323.png" alt="baf323.png"></a><br>该网络采用了一种结构化的时序金字塔池化方法（STPP）对提议（proposal）进行提取特征。首先将原始视频进行分帧，然后用TAG方法产生许多proposal。对于每一个proposal，对其进行增广后，文中提出将其分割成L个段（segment），然后从这L个段中分别采样出一个片段（snippet）来。这一个snippet是由一些连续的帧和这些帧对应的光流图像（一个帧对应到许多光流图像，光流图像是另外从视频中计算提取）组成，即是单帧表示静态内容，许多光流图像表示对应的动态内容。这样的话就产生了L个snippets，而增广提议被分割成三个阶段（starting，course，ending)，这样每个阶段都包含了一定数目的snippets，总和加起来是L。 具体来说，文中提出对这三个阶段的处理都不同。对于course阶段，文中提出把它分两级，第一级就是一个部分，第二级分为两个部分。对于starting和ending的阶段，直接就是一级，这样的话总共就是5个部分。然后将这5个部分里面的snippet送入特征提取器（feature extractor)，得到Vt。对于代表每个部分的池化特征，文中提出这样计算：<br><img src="http://photouploads.com/images/d8659d.png" alt="d8659d.png"><br>最后将所有的池化特征进行联结，得到这个代表整个增广提议的全局特征，送入两种分类器中。这两种分类器一类是多类行为分类器，另一类是一系列二元完整性分类器。多类行为分类器对视频中的行为分为K+1类，K种行为外加一个背景类，这种分类器只对course阶段的三个部分所提取联结成的全局特征进行处理。而一系列（K个）二元完整性分类器是对所有部分所提取联结成的全局特征进行处理。这两种分类器的结果进行综合便得到行为所属的类别。<br><a href="https://photouploads.com/image/EjvW" target="_blank" rel="noopener"><img src="http://photouploads.com/images/34a543.png" alt="34a543.png"></a><br>我解释下上述的计算分类loss的公式，第一项是在给定提议pi下，求该提议中出现行为类别ci（ci属于K+1个类别之一）的概率，进行交叉熵计算。然后第二项只对非背景类进行计算，在给定提议pi下并且确定了其中包含的行为类别ci，求该提议下行为是完整（bi用来表示行为是完整的）的概率，进行交叉熵计算。最后把这两项交叉熵加起来得到总的分类损失。对于用TAG产生的proposals，文中提出将其分为三类标签，分别是（ci&gt;0,bi=1)，ci=0，(ci&gt;0,bi=0)，也就是提议中出现行为并且行为是完整的、提议中没有出现行为即只出现背景、提议中出现行为但不完整（具体怎么打这三个标签得依据最近的groundtruth）。在训练的时候，实际上这个分类损失就是网络模型对proposal预测的值（提议中出现某类行为的概率）与该proposal本身的标签之间进行比较而来的。<br><a href="https://photouploads.com/image/Ejva" target="_blank" rel="noopener"><img src="http://photouploads.com/images/00d043.png" alt="00d043.png"></a><br>对于行为的定位，文中提出与RCNN中盒回归类似的时序回归方法即是对正提议pi（positive proposal，ci&gt;0,bi=1）的中心ui，和长度θi（log尺度）相对于groundtruth的变化进行回归，这个groundtruth指的是与该正提议最接近的groundtruth 。至于回归函数，文中提出用smooth L1损失函数，然后将这两类损失进行相加得到上述的多任务损失。用λ来调整两个损失的重要性。</p>
-<p>下面再讲讲TAG（temporal actionness grouping，时序行为性分组）技术的原理。首先这个技术是用来产生proposal的，相比于其他产生proposal的方法，这个技术产生的数量更少并且更好。<br>      <a href="https://photouploads.com/image/Ejvi" target="_blank" rel="noopener"><img src="http://photouploads.com/images/188580.png" alt="188580.png"></a><br>      首先用一个二元行为性分类器对从视频中提取出的一系列snippets进行分类，得到结果就如上图蓝色线所示。然后倒过来得到红色线，用分水岭算法对红色线所示的低洼进行处理，即是用不同级别γ的水对低洼进行灌溉。低洼越低，所在的水级颜色越深。最后把这些流域（basins）G(γ)提出来得到红线之下的方块图。然后我再说说产生proposal的方块合并策略，从第一个方块开始，逐渐加入紧随着的方块，若用方块的底边之和除以第一个方块的左边界到最后加入的方块的右边界之间的长度所计算出来的值低于阈值T时，第一块的左边界到最后加入的一块的右边界之间的段作为一个proposal。文中提出从0到1之间以0.05的步长来设置一系列γ和T，用这些参数采用TAG方法产生出proposals，最后用NMS（非极大值抑制）方法去除高度重合的proposal来得到最终的proposals。</p>
-<p>总结一下，文中提出的这种对proposal增广又分级进行处理的策略着实有效，TAG技术的运用使得proposal的质量大大提高，具体细节请看原文（在第一行“论文”两字上），想要交流的可在下面评论^_^                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </p>
 
-        </div>
+    
+
+    <!-- Comments -->
     
 
 </div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/15/新的开始/">
-                新的开始
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-15</span>
-            
-            
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>费了好几天，终于把自己的网站弄好了。之前一直用CSDN托管的<a href="https://blog.csdn.net/qq_22194315" title="my old blog" target="_blank" rel="noopener">傻瓜式博客</a>，感觉没多大意思。所以想自己建个网站，由于github免费提供服务器托管网页，那就直接考虑git+hexo的方式建站。</p>
-<p>然后自己看了看廖雪峰的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">git教程</a>，受益颇多。然后根据<a href="https://blog.csdn.net/qq_22194315/article/details/79936134" target="_blank" rel="noopener">这篇博客</a>就搭建了现在这个网站，感觉良好:)</p>
-<p>至于为什么要写博客，我列如下几个原因：</p>
-<ul>
-<li>感觉学习效率不高，用博客来记录学习历程应该很有趣并可以提高学习的效率；</li>
-<li>写博客的话会让生活更加充实，我有幸看到一位大牛的<a href="http://pluskid.org/" target="_blank" rel="noopener">博客</a>，并不是想盲目模仿别人而是觉得这种方式的确会让生活不会太无聊；</li>
-<li>因为自己有继续深造的想法，那么好好打造自己应该先从一个blogger开始。</li>
-</ul>
-<p>对于这个新的博客，我想多写写自己的东西，而不是一昧地去转载别人的。<br>之前的CSDN博客就是这样的，自己的东西还是少，主要是收藏别人的东西。</p>
-<p>对于要写的东西，我做了如下几点分类：</p>
-<ul>
-<li>与自己研究方向相关的东西</li>
-<li>在生活中遇到的一些有趣的事</li>
-<li>对人生和世界的思考</li>
-</ul>
-<p>最后以一幅图结尾，</p>
-<p> <img src="http://pic.sc.chinaz.com/files/pic/pic9/201510/apic15654.jpg" alt="icon"></p>
-<p>只希望品人生百味，或喜或悲，前途路上处处皆风景！</p>
-
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/04/13/hello-world/">
-                Hello World
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-13</span>
-            
-            
-            
-        </div>
-    </div>
-
-    
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        </div>
-    
-
-</div>
-            
         </section>
+
     </div>
 </div>
-
-
-
-
 
 
 </div>
